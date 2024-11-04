@@ -1,0 +1,54 @@
+name: Firebase Deploy
+
+# Trigger the workflow on pushes to the main branch.
+on:
+  push:
+    branches:
+      - main  # Replace with your target branch if different
+
+# Define the deployment job.
+jobs:
+  deploy:
+    # Specify the OS for the job to run on.
+    runs-on: ubuntu-latest
+
+    # Job steps
+    steps:
+      # Step 1: Checkout the repository.
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Node.js for Firebase CLI.
+      - name: Set up Node.js
+        uses: actions/setup-node@v14  # You can adjust Node version as needed
+        with:
+          node-version: '14'
+
+      # Step 3: Cache Firebase CLI and Node.js dependencies to speed up builds.
+      - name: Cache Firebase CLI
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      # Step 4: Install Firebase CLI globally.
+      - name: Install Firebase CLI
+        run: npm install -g firebase-tools
+
+      # Step 5: Deploy to Firebase Hosting using the Firebase token.
+      - name: Deploy to Firebase Hosting
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}  # Ensure this token is added to GitHub Secrets
+        run: firebase deploy --only hosting
+
+      # Step 6: Post-deployment success message
+      - name: Deployment Success
+        if: success()
+        run: echo "Deployment to Firebase Hosting was successful!"
+
+      # Optional: Add a step for deployment failure notification
+      - name: Deployment Failure
+        if: failure()
+        run: echo "Deployment failed. Please check logs for details."
