@@ -12,7 +12,7 @@ body {
   line-height: 1.6;
 }
 
-/* Hero Section with Overlay and Light Flare */
+/* Hero Section */
 .hero {
   position: relative;
   height: 60vh;
@@ -54,6 +54,10 @@ body {
   transition: background-color 0.3s ease;
 }
 
+.cta-button:hover {
+  background-color: #e88a00;
+}
+
 /* Section Styling */
 .section {
   padding: 50px 20px;
@@ -73,37 +77,14 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Contact Form */
-form {
-  display: flex;
-  flex-direction: column;
-}
-
-form label {
-  margin: 10px 0 5px;
-  font-weight: bold;
-}
-
-form input,
-form textarea {
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-form button {
+/* Footer */
+footer {
   background: #003366;
   color: #ffffff;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  margin-top: 10px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-form button:hover {
-  background: #ff9900;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: 20px;
+  font-size: 0.9rem;
 }
 
 /* Animations */
