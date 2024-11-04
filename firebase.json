@@ -1,17 +1,11 @@
 {
   "hosting": {
-    "public": "website",  // This should be the folder where your HTML files are located
+    "public": "website",  // Adjust to the folder where your HTML files are located
     "ignore": [
       "firebase.json",
       "**/.*",
       "**/node_modules/**"
     ],
-    "cleanUrls": true,
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+    "cleanUrls": true
   }
 }
